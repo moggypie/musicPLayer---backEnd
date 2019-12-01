@@ -1,0 +1,139 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class AlbumCollection<albums> implements Comparable<AlbumCollection> {
+
+    public ArrayList<Album> albums;
+
+    //  public int compareTo(AlbumCollection albumCollection) {
+    //      return albums.compareTo(albumCollection.getAlbums());
+
+    public AlbumCollection() {
+        this.albums = new ArrayList<>();
+        //default constructor - empty
+    }
+
+    public void read(String filename) {    //reading
+
+        try {
+            File newFile;
+            newFile = new File(filename);
+            FileReader filereader = new FileReader(newFile);
+            BufferedReader reader = new BufferedReader(filereader);
+
+            String line = null;
+            Album album = null;
+
+            while ((line = reader.readLine()) != null) {
+                // System.out.println(line);      test print out
+
+                //  if string contains hyphen then album, if not then track
+
+                if (!line.contains(" - ")) {      //its an album
+                    album = new Album(line);
+                    albums.add(album);
+
+                    //  System.out.println(album);      //test print
+                } else {                        //its a track
+                    Track track = new Track(line);
+                    album.add(track);
+                    //  System.out.println(track);   //test print
+                }
+            }
+            reader.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public ArrayList<Album> getAlbums(int i) {
+        return albums;
+    }
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
+    @Override
+
+    public String toString() {
+        String str = "";
+        for (Album album : albums) {
+            str = str + album;
+
+        }
+        return str;
+    }
+
+
+    @Override
+    public int compareTo(AlbumCollection albumCollection) {
+        return 0;
+    }
+
+    public void sortAlbums() {
+        Collections.sort(albums);
+    }
+
+    public void albumDuration(String str) {     //for total Duration of an Album(s) by artist
+        Duration d = new Duration();
+
+
+        for (Album a : albums) {
+            if (a.getArtist().equals(str)) {
+                //  System.out.println(a.getArtist() + " found: " + a.getTitle() + a.getTracks());  // test print(shows the albums and tracks being read)
+                for (Track t : a.getTracks()) {
+
+
+                    d = d.add(t.getDuration());
+                }
+            }
+        }
+        System.out.println("\nTotal duration of albums listed by " + str + " equals " + d + "\n");
+    }
+
+
+    public void albumNoTracks(String str) {    // track count for specific artist (lists album names as well)
+
+        for (Album a : albums) {
+            if (a.getArtist().equals(str)) {
+                int n = a.trackCount();
+                System.out.println(a.getArtist() + " : " + a.getTitle() + " - Track count: " + n);
+            }
+        }
+
+
+    }
+
+
+    public void albumTrackCount() {    // track count for all albums
+        for (Album a : albums) {
+            int n = a.trackCount();
+            System.out.println(a.getArtist() + " " + a.getTitle() + " - Track count: " + n);
+        }
+
+
+    }
+/*
+    public void highestAlbumTrackCount() {        //to sort track list number
+        for (Album a : albums) {
+            int n = a.trackCount();
+            Collections.sort(albums<>, n);
+
+            System.out.println(a.getArtist() + " " + a.getTitle() + " - Track count: " + n);
+        }
+
+    }*/
+
+}
+
+
+
+
