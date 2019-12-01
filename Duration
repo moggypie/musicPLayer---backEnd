@@ -1,0 +1,104 @@
+package com.company;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+
+public class Duration implements Comparable<Duration> {
+
+    private static boolean hasnext;
+    private int secs;
+    private int mins;
+    private int hrs;
+
+
+
+
+    public Duration() {
+        this.secs = 0;
+        this.mins = 0;
+        this.hrs = 0;
+    }
+
+    public Duration(int hrs, int mins, int secs) {
+        this.secs = secs;
+        this.mins = mins;
+        this.hrs = hrs;
+    }
+
+    // breaks down the time string into h.m.s. components and casts(?) it as interger
+    public Duration(String time) {
+        String[] timeArray = time.split(":");
+        String hrsStrg = timeArray[0];
+        String minStrg = timeArray[1];
+        String secStrg = timeArray[2];
+        this.hrs = Integer.parseInt(hrsStrg);
+        this.mins = Integer.parseInt(minStrg);
+        this.secs = Integer.parseInt(secStrg);
+
+    }
+
+
+    @Override
+    public String toString() {
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(hrs) + ":" + df.format(mins) + ":" + df.format(secs);
+    }
+
+    public int getHrs() {
+        return hrs;
+    }
+
+    public int getMins() {
+        return mins;
+    }
+
+    public int getSecs() {
+        return secs;
+    }
+
+
+    public Duration add(Duration d2) {
+        int h = this.hrs + d2.getHrs();
+        int m = this.mins + d2.getMins();
+        int s = this.secs + d2.getSecs();
+        if (s >= 60) {
+            m++;
+            s = s % 60;
+        }
+        if (m >= 60) {
+            h++;
+            m = m % 60;
+        }
+        Duration newDuration = new Duration(h, m, s);
+        return newDuration;
+    }
+
+
+    // converts hh.mm.ss. time into total number of seconds
+    public int TimeInSecs(Duration t) {
+
+        int hr = t.getHrs() * 3600;
+        int mn = t.getMins() * 60;
+        int sc = t.getSecs();
+        int tiStotal = hr + mn + sc;
+        return tiStotal;
+
+    }
+
+
+
+    @Override
+    public int compareTo(Duration duration) {
+        return 0;
+    }
+
+    //test harness
+    public static void main(String[] args) throws Exception {
+
+        Duration d1 = new Duration(22, 33, 44);
+        Duration d2 = new Duration(22, 33, 44);
+        Duration d4 = new Duration(22, 33, 44);
+        Duration d5 = new Duration(22, 33, 44);
+
+
