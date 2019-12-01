@@ -1,0 +1,51 @@
+
+package com.company;
+
+import java.util.Objects;
+
+public class PlayListTrack extends Track {
+
+    public String playListTrack;
+    Track track = new Track();
+    Album album = new Album();
+
+
+    public PlayListTrack(String line, String playListTrack) throws Exception {
+        super(line);
+        this.playListTrack = playListTrack;
+    }               //built by IDE!
+
+    public PlayListTrack() {
+        playListTrack = track.getName() + album.getArtist() + album.getTitle();
+
+    }
+
+
+    public String PlayListTrackDisplay(String line) {
+        playListTrack = track.getName() + "{" + album.getArtist() + " " + "}";
+        return playListTrack;
+
+
+    }
+
+    public void getPlayListTrack(String artistName) {
+        while (album.getArtist().equals(artistName)) {
+            System.out.println(track);
+        }
+    }
+
+  /*  @Override
+    public int hashCode() {
+        return Objects.hash(playListTrack, track);
+    }*/
+
+    //test harness
+
+
+
+    }
+
+
+
+
+
