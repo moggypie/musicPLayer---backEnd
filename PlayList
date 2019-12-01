@@ -1,0 +1,68 @@
+
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+
+
+public class PlayList<PlayListTrack> {
+
+
+    public ArrayList<PlayListTrack> PLtracks;
+
+
+    public void fillPlayList() {
+
+    }
+
+    public void readPlayList(String filename) throws IOException {    //reading
+
+        try {
+            File newFile;
+            newFile = new File(filename);
+            FileReader filereader = new FileReader(newFile);
+            BufferedReader reader = new BufferedReader(filereader);
+
+            String line = null;
+            String albumString = null;
+            PlayList playList = null;
+            Album album = null;
+            String trackTitle = null;
+
+
+            while ((line = reader.readLine()) != null) {
+
+                albumString = line.substring(line.indexOf("(") + 1, line.indexOf(")"));
+                String[] bits = albumString.split(" : ");
+                String artist = bits[0];
+                String title = bits[1];
+                PLtracks = (ArrayList<PlayListTrack>) new ArrayList<Track>();
+
+
+                trackTitle = line.substring(0, line.indexOf("("));
+                System.out.println(albumString);
+                System.out.println(trackTitle);//test print
+            }
+            } catch (IOException ex) {
+            ex.printStackTrace();   //
+        }
+
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
