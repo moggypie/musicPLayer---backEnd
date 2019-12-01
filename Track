@@ -1,0 +1,60 @@
+package com.company;
+
+public class Track {
+
+    private String name;
+    private Duration duration;
+
+
+    public Track(String line) throws Exception { //eg The Jimi Hendrix Experience : Are you Experienced?
+        String[] trkBits = line.split(" - ");
+        this.duration = new Duration(trkBits[0]);       //  Argh!!!!!
+        name = trkBits[1];
+    }
+
+    public Track() {
+
+    }
+
+    public Duration getDuration() {
+        return this.duration;
+    }
+
+    public String getName() {
+        return this.name;
+
+    }
+
+
+    @Override
+    public String toString() {
+        return duration + " - " + name;
+    }
+
+
+//  test harness
+//      public static void main(String[] args){
+
+    public static void main(String[] args) throws Exception {
+
+        String s1 = "01:02:03 - Bopity";
+        String s2 = "01:02:03 - Bipity";
+        String s3 = "01:02:03 - boop";
+
+        Track track1 = new Track(s1);
+        Track track2 = new Track(s2);
+        Track track3 = new Track(s3);
+
+        Duration dur1 =  track1.getDuration();
+        Duration dur2 =  track2.getDuration();
+        Duration dur3 =  track3.getDuration();
+
+        Duration durTotal = new Duration();
+
+        durTotal = dur1.add(dur2);
+        System.out.println(durTotal);
+    }
+
+
+}
+
