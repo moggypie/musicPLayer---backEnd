@@ -1,0 +1,112 @@
+package com.company;
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Album implements Comparable<Album> {
+
+    public String artist;
+    public String title;
+    public ArrayList<Track> tracks;
+
+    public Album() {
+    }
+
+    public Album(String line) { //eg The Jimi Hendrix Experience : Are you Experienced?
+        String[] bits = line.split(" : ");
+        artist = bits[0];
+        title = bits[1];
+        tracks = new ArrayList<Track>();
+    }
+
+    public int trackCount(){
+       int itemCount = tracks.size();
+        return itemCount;
+    }
+
+
+
+
+    public Duration addTrackDuration() {
+        Duration durTotal = new Duration();
+        for (Track t : tracks) {
+            Duration d = t.getDuration();
+            durTotal.add(d);
+        }
+        return durTotal;
+
+    }
+
+    public String getArtist() {
+        String artist = this.artist;
+        return artist;
+    }
+
+
+    public String getTitle() {
+        String title;
+        title = this.title;
+        return title;
+    }
+
+    public ArrayList<Track> getTracks() {
+        return tracks;
+    }
+
+
+    @Override
+    public String toString() {    //string needed to add everything to and then print it at the end
+        String str = "";
+        for (Track t : tracks) {
+            str += t.toString()+ "\n";
+
+        }
+        return artist + " : " + title + "\n" + str;
+
+    }
+
+    @Override
+    public int compareTo(Album album) {
+        return artist.compareTo(album.getArtist());
+    }
+
+
+    public void add(Track track) {
+        tracks.add(track);
+
+    }
+
+
+
+
+
+    //test harness
+    public static void main(String[] args) {
+
+        String alb1 = "fuzzybunz : boogiewoogie";
+        String alb2 = "fuzzywuzzy : abc";
+        String alb3 = "bunnyfuzz : woogie";
+
+        ArrayList<String> arrayL = new ArrayList<String>();
+        arrayL.add("ert : aff");
+        arrayL.add("ch : afsaeg");
+        arrayL.add("zz : gfd");
+        arrayL.add("sf : af");
+
+
+        Album album = new Album(alb1);
+        System.out.println(album);
+        Collections.sort(arrayL);
+        System.out.println(arrayL);
+
+
+    }
+
+
+}
+
+
+
+
+
