@@ -1,0 +1,42 @@
+package com.company;
+
+import java.util.*;
+import java.io.*;
+
+
+public class AlbumInfoProgram {
+
+
+    public static void main(String[] args) throws Exception {
+
+
+        AlbumCollection albumCollection = new AlbumCollection();
+        albumCollection.read("albums.txt");
+        System.out.println(albumCollection);            //  1
+
+
+        albumCollection.sortAlbums();
+        System.out.println(albumCollection);         // 2  ...mostly, can't sort album title yet :-(
+
+
+        albumCollection.albumDuration("Pink Floyd");    // 3  duration of albums by specific artist
+
+
+
+        albumCollection.albumNoTracks("Pink Floyd");    // number of tracks on an album by specific artist
+
+
+        albumCollection.albumTrackCount();       // lists track length for all albums
+
+
+        PlayList playlist = new PlayList();
+        playlist.readPlayList("playlist.txt");   //read in playlist
+        System.out.println(playlist);
+
+
+
+    }
+
+}
+
+
